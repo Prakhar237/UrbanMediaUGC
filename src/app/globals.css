@@ -1,26 +1,304 @@
 @import "tailwindcss";
 
+@theme {
+  --color-bg-primary: #0a0a0a;
+  --color-bg-secondary: #111111;
+  --color-bg-tertiary: #1a1a1a;
+  --color-border-subtle: #1f1f1f;
+  --color-border-default: #2a2a2a;
+  --color-text-primary: #fafafa;
+  --color-text-secondary: #a1a1a1;
+  --color-text-tertiary: #6b6b6b;
+  --color-accent-warm: #e8dcc4;
+  --color-accent-gold: #c9a961;
+
+  --font-sans: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-fraunces), ui-serif, Georgia, serif;
+  --font-mono: var(--font-montserrat), ui-sans-serif, system-ui, sans-serif;
+  --font-nav: var(--font-montserrat), ui-sans-serif, system-ui, sans-serif;
+  --font-data: var(--font-montserrat), ui-sans-serif, system-ui, sans-serif;
+
+  --ease-premium: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  color-scheme: dark;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+html,
+body {
+  background: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+::selection {
+  background: var(--color-accent-warm);
+  color: var(--color-bg-primary);
+}
+
+.mono-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--color-text-tertiary);
+}
+
+.hairline {
+  border-color: var(--color-border-subtle);
+}
+
+/* ── Portfolio section ─────────────────────────────── */
+
+.portfolio-grid {
+  margin-top: 4rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.75rem;
+}
+
+@media (max-width: 1024px) {
+  .portfolio-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 640px) {
+  .portfolio-grid {
+    grid-template-columns: 1fr;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Card */
+.portfolio-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 16px;
+  border: 1px solid var(--color-border-subtle);
+  background: var(--color-bg-secondary);
+  cursor: pointer;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.5s ease,
+              box-shadow 0.5s ease;
+}
+.portfolio-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--color-accent-gold);
+  box-shadow: 0 12px 48px rgba(201, 169, 97, 0.1),
+              0 0 0 1px rgba(201, 169, 97, 0.15);
+}
+
+/* Video wrapper */
+.portfolio-card__video-wrap {
+  position: relative;
+  aspect-ratio: 9 / 14;
+  overflow: hidden;
+  background: var(--color-bg-tertiary);
+}
+
+.portfolio-card__video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+.portfolio-card__video.is-loaded {
+  opacity: 1;
+}
+
+/* Gradient overlays */
+.portfolio-card__gradient-top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 30%;
+  background: linear-gradient(to bottom, rgba(10, 10, 10, 0.6), transparent);
+  pointer-events: none;
+  z-index: 2;
+}
+.portfolio-card__gradient-bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 50%;
+  background: linear-gradient(to top, var(--color-bg-secondary), transparent);
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* Play indicator */
+.portfolio-card__play-indicator {
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  border-radius: 100px;
+  background: rgba(10, 10, 10, 0.75);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--color-border-default);
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 5;
+}
+.portfolio-card__play-indicator.is-active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.portfolio-card__play-bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 12px;
+}
+.portfolio-card__play-bars span {
+  display: block;
+  width: 3px;
+  border-radius: 1px;
+  background: var(--color-accent-warm);
+}
+.portfolio-card__play-bars span:nth-child(1) {
+  animation: playbar 0.8s ease-in-out infinite alternate;
+  height: 40%;
+}
+.portfolio-card__play-bars span:nth-child(2) {
+  animation: playbar 0.8s ease-in-out 0.2s infinite alternate;
+  height: 80%;
+}
+.portfolio-card__play-bars span:nth-child(3) {
+  animation: playbar 0.8s ease-in-out 0.4s infinite alternate;
+  height: 55%;
+}
+
+@keyframes playbar {
+  0% { height: 25%; }
+  100% { height: 100%; }
+}
+
+.portfolio-card__play-text {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-text-secondary);
+}
+
+/* Platform badge */
+.portfolio-card__badge {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 10px;
+  border-radius: 100px;
+  background: rgba(10, 10, 10, 0.75);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--color-border-default);
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--color-text-secondary);
+  z-index: 3;
+}
+.portfolio-card__badge-icon {
+  width: 10px;
+  height: 10px;
+  color: var(--color-accent-warm);
+}
+
+/* Hover border glow */
+.portfolio-card__border-glow {
+  position: absolute;
+  inset: -1px;
+  border-radius: 16px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  z-index: 10;
+  border: 1px solid rgba(201, 169, 97, 0.35);
+}
+.portfolio-card:hover .portfolio-card__border-glow {
+  opacity: 1;
+}
+
+/* Card footer */
+.portfolio-card__footer {
+  border-top: 1px solid var(--color-border-subtle);
+  background: var(--color-bg-primary);
+  padding: 20px 22px;
+}
+.portfolio-card__footer-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-accent-warm);
+}
+.portfolio-card__footer-hook {
+  margin-top: 8px;
+  font-size: 19px;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  line-height: 1.2;
+  color: var(--color-text-primary);
+  transition: color 0.3s ease;
+}
+.portfolio-card:hover .portfolio-card__footer-hook {
+  color: var(--color-accent-warm);
+}
+.portfolio-card__footer-cta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 12px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--color-text-tertiary);
+  transition: color 0.3s ease;
+}
+.portfolio-card:hover .portfolio-card__footer-cta {
+  color: var(--color-accent-warm);
+}
+.portfolio-card__footer-arrow {
+  width: 10px;
+  height: 10px;
+  transform: translateX(-4px);
+  opacity: 0;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.3s ease;
+}
+.portfolio-card:hover .portfolio-card__footer-arrow {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
