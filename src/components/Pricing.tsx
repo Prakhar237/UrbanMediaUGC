@@ -138,7 +138,7 @@ export default function Pricing() {
               </ul>
 
               <a
-                href="https://calendly.com/prakharpundir/30min"
+                href="https://calendly.com/pawni-thakur29/30min"
                 target="_blank"
                 rel="noopener noreferrer"
                 className={`group mt-8 inline-flex items-center justify-center gap-2 rounded-full px-5 py-3 text-[13px] font-medium transition-transform duration-300 hover:scale-[1.02] ${

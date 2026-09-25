@@ -66,7 +66,7 @@ export default function Nav() {
         </nav>
 
         <a
-          href="https://calendly.com/prakharpundir/30min"
+          href="https://calendly.com/pawni-thakur29/30min"
           target="_blank"
           rel="noopener noreferrer"
           className="group inline-flex items-center gap-2 rounded-full bg-[var(--color-text-primary)] px-4 py-2 text-[12px] font-medium text-[var(--color-bg-primary)] transition-transform duration-300 hover:scale-[1.02]"

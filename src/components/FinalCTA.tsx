@@ -69,7 +69,7 @@ export default function FinalCTA() {
             className="mt-12 flex flex-col items-center gap-6"
           >
             <a
-              href="https://calendly.com/prakharpundir/30min"
+              href="https://calendly.com/pawni-thakur29/30min"
               target="_blank"
               rel="noopener noreferrer"
               className="group inline-flex items-center gap-3 rounded-full bg-[var(--color-text-primary)] px-8 py-5 text-[15px] font-medium text-[var(--color-bg-primary)] transition-transform duration-300 hover:scale-[1.02] hover:shadow-[0_0_40px_rgba(232,220,196,0.3)]"

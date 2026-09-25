@@ -106,7 +106,7 @@ export default function Hero() {
               className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4"
             >
               <a
-                href="https://calendly.com/prakharpundir/30min"
+                href="https://calendly.com/pawni-thakur29/30min"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group inline-flex items-center justify-center gap-2 rounded-full bg-[var(--color-text-primary)] px-6 py-3.5 text-[14px] font-medium text-[var(--color-bg-primary)] transition-transform duration-300 hover:scale-[1.02] hover:shadow-[0_0_32px_rgba(232,220,196,0.25)]"
