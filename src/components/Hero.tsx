@@ -1,6 +1,8 @@
 "use client";
 
 import Image from "next/image";
+import VideoPlaylist from "@/components/VideoPlaylist";
+import { heroVideos } from "@/lib/portfolio";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { SiMeta, SiTiktok, SiInstagram, SiYoutube } from "react-icons/si";
@@ -115,7 +117,7 @@ export default function Hero() {
                 <span className="inline-block transition-transform duration-300 group-hover:translate-x-1">→</span>
               </a>
               <a
-                href="#samples"
+                href="#work"
                 className="group inline-flex items-center justify-center gap-2 rounded-full border border-[var(--color-border-default)] px-6 py-3.5 text-[14px] font-medium text-[var(--color-text-primary)] transition-colors duration-300 hover:border-[var(--color-accent-warm)] hover:text-[var(--color-accent-warm)]"
               >
                 <span>See Sample Output</span>
@@ -129,44 +131,9 @@ export default function Hero() {
               initial={{ opacity: 0, scale: 0.98 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1.1, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-              className="relative aspect-[4/5] w-full overflow-hidden rounded-[20px] border border-[var(--color-border-subtle)] bg-[var(--color-bg-secondary)]"
+              className="relative mx-auto w-full max-w-[400px]"
             >
-              <video
-                src="/videos/hero-reel.mp4"
-                autoPlay
-                loop
-                muted
-                playsInline
-                preload="metadata"
-                className="absolute inset-0 h-full w-full object-cover"
-              />
-              <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(120%_80%_at_50%_30%,rgba(232,220,196,0.06),transparent_60%)]" />
-              <div className="pointer-events-none absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-[var(--color-bg-primary)]/40 to-transparent" />
-              <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-[var(--color-bg-primary)]/40 to-transparent" />
-
-              <div className="absolute right-4 top-4 flex items-center gap-2 rounded-full border border-[var(--color-border-default)] bg-[rgba(10,10,10,0.7)] px-3 py-1.5 backdrop-blur-md">
-                <span className="relative flex h-1.5 w-1.5">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--color-accent-warm)] opacity-60" />
-                  <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[var(--color-accent-warm)]" />
-                </span>
-                <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--color-text-secondary)]">
-                  AI Generated
-                </span>
-              </div>
-
-              <div className="absolute bottom-4 left-4 right-4 flex items-end justify-between">
-                <div>
-                  <div className="font-mono text-[9px] uppercase tracking-[0.25em] text-[var(--color-text-tertiary)]">
-                    Sample / 003
-                  </div>
-                  <div className="mt-1 font-mono text-[10px] tracking-[0.15em] text-[var(--color-text-secondary)]">
-                    HOOK_VARIANT_07
-                  </div>
-                </div>
-                <div className="font-mono text-[10px] tracking-[0.15em] text-[var(--color-text-tertiary)]">
-                  00:08
-                </div>
-              </div>
+              <VideoPlaylist videos={heroVideos} variant="portrait" label="Hero showreel" />
             </motion.div>
 
             <div className="pointer-events-none absolute -inset-x-8 -inset-y-8 -z-10 bg-[radial-gradient(60%_50%_at_50%_50%,rgba(232,220,196,0.06),transparent_70%)]" />

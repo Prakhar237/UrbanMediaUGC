@@ -18,9 +18,9 @@ export default function Home() {
       <Nav />
       <main>
         <Hero />
+        <Portfolio />
         <SocialProof />
         <VelocityArgument />
-        <Portfolio />
         <HowItWorks />
         <Work />
         <Stats />
