@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import type { PortfolioVideo } from "@/lib/portfolio";
+import FilmControls from "@/components/FilmControls";
 
 function PlaylistFilm({
   video,
@@ -68,7 +69,6 @@ function PlaylistFilm({
         src={video.src}
         poster={video.poster}
         aria-label={video.title}
-        controls
         muted={muted}
         playsInline
         preload="none"
@@ -79,6 +79,7 @@ function PlaylistFilm({
       >
         Your browser does not support video. <a href={video.src}>Open {video.title}</a>.
       </video>
+      <FilmControls videoRef={ref} title={video.title} />
       {failed ? (
         <div className="reel-player__error">
           <p>This film couldn’t load.</p>

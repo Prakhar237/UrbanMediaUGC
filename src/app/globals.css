@@ -69,6 +69,15 @@ section[id] { scroll-margin-top: 100px; }
 .reel-player--portrait .reel-player__screen { aspect-ratio: 9 / 13; }
 .reel-player--landscape .reel-player__screen { aspect-ratio: 16 / 9; }
 .reel-player__video { display: block; width: 100%; height: 100%; object-fit: contain; }
+.reel-player--portrait .reel-player__video { object-fit: cover; }
+.film-dialog__media { position: relative; }
+.film-controls { position: absolute; right: 14px; bottom: 14px; display: flex; gap: 8px; z-index: 2; transition: opacity .2s; }
+.film-controls.is-playing { opacity: 0; }
+.reel-player__screen:hover .film-controls, .film-dialog__media:hover .film-controls, .film-controls:focus-within { opacity: 1; }
+.film-controls button { display: grid; place-items: center; width: 40px; height: 40px; border: 1px solid #ffffff30; border-radius: 50%; background: #0a0a0a80; backdrop-filter: blur(8px); color: white; cursor: pointer; }
+.film-controls button:hover { background: #0a0a0acc; }
+.film-controls button svg { width: 18px; height: 18px; }
+@media (hover: none) { .film-controls.is-playing { opacity: 1; } }
 .reel-player__badge {
   position: absolute; top: 18px; right: 18px; pointer-events: none;
   display: flex; align-items: center; gap: 8px; padding: 8px 12px;

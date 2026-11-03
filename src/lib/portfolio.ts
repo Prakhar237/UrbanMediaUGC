@@ -39,8 +39,8 @@ export const workVideos = [
   video("sportshoes", "Sport Shoes", "Sport & lifestyle", "Made for movement."),
   video("candy", "Candy", "Food & beverage", "A little sweetness on screen."),
   video("ootd", "Outfit of the Day", "Fashion", "Personal style, in motion."),
-  video("sp1", "Boho Details", "Fashion & accessories", "Texture, colour, and the smallest details."),
-  video("sp2", "The Boho Edit", "Fashion & accessories", "A statement piece from a new perspective."),
+  video("mixer", "Mixer", "Product demo", "Everyday essentials, brought to life."),
+  video("bohobag", "Boho Bag", "Fashion & lifestyle", "A little personality. A statement piece."),
   video("ugc1", "The Serum Story", "Skincare", "A beauty essential, up close."),
   video("ugc2", "The Beauty Ritual", "Beauty UGC", "Skincare in an everyday routine."),
 ];

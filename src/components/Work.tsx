@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { workVideos, type PortfolioVideo } from "@/lib/portfolio";
+import FilmControls from "@/components/FilmControls";
 
 function FilmDialog({ video, onClose }: { video: PortfolioVideo; onClose: () => void }) {
   const dialogRef = useRef<HTMLDialogElement>(null);
@@ -42,9 +43,12 @@ function FilmDialog({ video, onClose }: { video: PortfolioVideo; onClose: () => 
           <div><span className="reel-player__eyebrow">{video.category}</span><h3 id="film-dialog-title">{video.title}</h3></div>
           <button type="button" autoFocus onClick={onClose} aria-label="Close video">✕</button>
         </div>
-        <video ref={videoRef} src={video.src} poster={video.poster} controls playsInline preload="metadata" aria-label={video.title}>
-          Your browser does not support video. <a href={video.src}>Open the video</a>.
-        </video>
+        <div className="film-dialog__media">
+          <video ref={videoRef} src={video.src} poster={video.poster} playsInline preload="metadata" aria-label={video.title}>
+            Your browser does not support video. <a href={video.src}>Open the video</a>.
+          </video>
+          <FilmControls videoRef={videoRef} title={video.title} />
+        </div>
         <a className="film-dialog__fallback" href={video.src} target="_blank" rel="noreferrer">Open video in a new tab ↗</a>
       </div>
     </dialog>
